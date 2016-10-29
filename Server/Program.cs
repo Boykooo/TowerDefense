@@ -10,7 +10,11 @@ namespace Server
     {
         static void Main(string[] args)
         {
+            ServerSocket server = new ServerSocket();
 
+            Task.Run(() => server.Start());
+
+            while (Console.ReadLine().ToLower() != "stop") ;
         }
     }
 }
