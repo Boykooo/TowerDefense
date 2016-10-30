@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Network;
+using Server.ParseMessage;
 
 namespace Server
 {
@@ -24,6 +25,8 @@ namespace Server
             maxQueue = 10;
             formatter = new BinaryFormatter();
             this.serverFacade = serverFacade;
+            idManager = new IDManager.IDManager();
+            parser = new Parser();
         }
 
         private Socket socket;
@@ -36,6 +39,8 @@ namespace Server
 
         private Dictionary<int, Socket> clients;
         private IServerFacade serverFacade;
+        private IDManager.IDManager idManager;
+        private Parser parser;
 
         public event Action<int> Disconnect = (x) => { };
         public event Action<byte[], int> GetMessage = (x, y) => { };
@@ -53,76 +58,81 @@ namespace Server
                 try
                 {
                     Socket client = socket.Accept();
-                    currId = id++;
+                    int id = idManager.GetID();
+                    clients.Add(id, client);
 
                     Console.WriteLine("Установлено соединение с {0}", client.RemoteEndPoint);
-
 
                     //ThreadPool.QueueUserWorkItem((x) => ListenUser(client));
                     //ThreadPool.QueueUserWorkItem((x) => Send(client));
 
-                    Thread listenUser = new Thread(() => ListenUser(client));
+                    Thread listenUser = new Thread(() => ListenUser(id, client));
                     listenUser.Start();
                     //Thread send = new Thread(() => Send(client));
                     //send.Start();
                 }
                 catch
                 {
-
                     Console.WriteLine("Ошибка в коннекте нового юзера");
                 }
             }
         }
-        private void ListenUser(Socket userSocket)
+        private void ListenUser(int id, Socket userSocket)
         {
             byte[] data = new byte[packetLenght];
             int len;
-            bool inGame = false;
-            int idUser = -1;
             try
             {
                 while (true)
                 {
-                    if (!inGame)
+                    //if (!inGame)
+                    //{
+                    //    len = userSocket.Receive(data);
+
+                    //    using (MemoryStream stream = new MemoryStream(data))
+                    //    {
+                    //        BinaryFormatter f = new BinaryFormatter();
+
+                    //        Message msg = f.Deserialize(stream) as Message;
+
+                    //        if (msg.Method == "SignIn")
+                    //        {
+                    //            serverFacade.SignIn(ref idUser, msg.Arguments[0].ToString(), msg.Arguments[1].ToString());
+                    //            if (id != -1)
+                    //            {
+                    //                inGame = true;
+                    //                Console.WriteLine("{0} выполнил вход в систему", msg.Arguments[0].ToString());
+                    //                clients.Add(id, userSocket);
+                    //                Send(userSocket);
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            serverFacade.GetType().GetMethod(msg.Method).Invoke(serverFacade, msg.Arguments);
+                    //        }
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Прием сообщений...");
+                    //}
+
+                    len = userSocket.Receive(data);
+
+                    using (MemoryStream stream = new MemoryStream(data))
                     {
+                        BinaryFormatter f = new BinaryFormatter();
 
+                        Message msg = f.Deserialize(stream) as Message;
 
+                        object[] args = new object[msg.Arguments.Length + 1];
+                        msg.Arguments.CopyTo(args, 0);
+                        args[args.Length - 1] = id;
 
-                        len = userSocket.Receive(data);
-
-                        using (MemoryStream stream = new MemoryStream(data))
-                        {
-                            BinaryFormatter f = new BinaryFormatter();
-
-                            Message msg = f.Deserialize(stream) as Message;
-
-                            if (msg.Method == "SignIn")
-                            {
-                                serverFacade.SignIn(ref idUser, msg.Arguments[0].ToString(), msg.Arguments[1].ToString());
-                                if (id != -1)
-                                {
-                                    inGame = true;
-                                    Console.WriteLine("{0} выполнил вход в систему", msg.Arguments[0].ToString());
-                                    clients.Add(id, userSocket);
-                                }
-                            }
-                        }
-
-
-
-
-
-
-
-
-
-
-
+                        serverFacade.GetType().GetMethod(msg.Method).Invoke(serverFacade, args);
                     }
-                    else
-                    {
-                        Console.WriteLine("Прием сообщений...");
-                    }
+
                 }
             }
             catch
@@ -130,16 +140,11 @@ namespace Server
                 Console.WriteLine("Ошбика в слушателе");
             }
         }
-        private void InGame(Socket userSocket)
-        {
-
-        }
-
         private void Send(Socket userSocket)
         {
             try
             {
-                string str = "hello client";
+                string str = "Вы вошли в игру";
 
                 using (MemoryStream stream = new MemoryStream())
                 {
@@ -162,17 +167,13 @@ namespace Server
         {
             AcceptNewClient();
         }
-        public void Send(int id, byte[] message)
+        public void Send(int id, Message message)
         {
             if (clients.ContainsKey(id))
             {
-                clients[id].Send(message);
+                Console.WriteLine("Сообщение <{0}> отправлено", message.Method);
+                clients[id].Send(parser.GetSerializedMessage(message));
             }
-        }
-
-        public void NewPlayer()
-        {
-            throw new NotImplementedException();
         }
     }
 }

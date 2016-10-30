@@ -1,6 +1,7 @@
 ﻿using Proxy;
 using Server.DB;
 using Server.Facade;
+using Server.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace Server
         {
             IClientFacade clientFacade = new ClientFacade();
 
-            IServerFacade serverFacade = new ServerFacade(clientFacade);
+            ServerFacade serverFacade = new ServerFacade(clientFacade);
 
-            ServerSocket server = new ServerSocket(serverFacade);
+            IServer server = new ServerSocket(serverFacade);
 
+            serverFacade.Init(server);
 
             Task.Run(() => server.Start());
 

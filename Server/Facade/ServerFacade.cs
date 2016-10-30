@@ -1,4 +1,5 @@
-﻿using Proxy;
+﻿using Network;
+using Proxy;
 using Server.DB;
 using Server.Interfaces;
 using System;
@@ -19,16 +20,23 @@ namespace Server.Facade
 
         private IClientFacade clientFacade;
         private IDBController db;
+        IServer server;
         
+        public void Init(IServer server)
+        {
+            this.server = server;
+        }
 
-        public void SignIn(ref int id, string login, string password)
+        public void SignIn(string login, string password, int id)
         {
             Console.WriteLine("Идет проверка входа в систему {0}", login);
 
             if (db.CheckPasswod(login, password))
             {
-                id = db.GetID(login);
                 clientFacade.EnterTheGame();
+
+                Message msg = new Message("Успешный вход", login);
+                server.Send(id, msg);
             }
             else
             {
@@ -37,9 +45,12 @@ namespace Server.Facade
 
         }
 
-        public void SignUp(string login, string password, string mail)
+        public void SignUp(string login, string password, string mail, int id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Успешная регистрация {0}", login);
+            Message msg = new Message("Успешная регистрация", login);
+            server.Send(id, msg);
+
         }
     }
 }

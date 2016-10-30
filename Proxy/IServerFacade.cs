@@ -8,8 +8,8 @@ namespace Proxy
 {
     public interface IServerFacade
     {
-        void SignIn(ref int id, string login, string password);
-        void SignUp(string login, string password, string mail);
+        void SignIn(string login, string password, int id);
+        void SignUp(string login, string password, string mail, int id);
 
 
     }

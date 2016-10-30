@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,7 @@ namespace Server.Interfaces
     interface IServer 
     {
         void Start();
-        void Send(int id, byte[] message);
-        void NewPlayer();
+        void Send(int id, Message msg);
 
         event Action<int> Connect;
         event Action<int> Disconnect;
