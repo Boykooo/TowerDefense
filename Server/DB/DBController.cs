@@ -86,7 +86,22 @@ namespace Server.DB
 
         public bool CheckPasswod(string login, string password)
         {
-            return true;
+            lock(key)
+            {
+                OpenConnection();
+
+                MySqlCommand request = new MySqlCommand();
+                request.CommandText = "SELECT * FROM user_reg_data where Login = @login and Password = @password; ";
+                request.Parameters.AddWithValue("@login", login);
+                request.Parameters.AddWithValue("@password", password);
+                request.Connection = conn;
+
+                bool result = request.ExecuteReader().HasRows;
+
+                CloseConnection();
+
+                return result;
+            }
         }
 
         public bool CheckFreeMail(string mail)

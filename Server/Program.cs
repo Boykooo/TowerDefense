@@ -12,7 +12,7 @@ namespace Server
         static void Main(string[] args)
         {
 
-            IClientFacade clientFacade = new ClientFacade();
+            ClientFacade clientFacade = new ClientFacade();
 
             ServerFacade serverFacade = new ServerFacade(clientFacade);
 
@@ -21,6 +21,7 @@ namespace Server
             IServer server = new ServerSocket(clientController);
 
             serverFacade.Init(clientController);
+            clientFacade.Init(clientController);
 
             Task.Run(() => server.Start());
 

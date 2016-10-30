@@ -22,7 +22,15 @@ namespace Server.ClientController.ParseMessage
         {
             using (MemoryStream stream = new MemoryStream(msg))
             {
-                return formatter.Deserialize(stream) as Message;
+                object obj = formatter.Deserialize(stream);
+                if (obj is Message)
+                {
+                    return obj as Message;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         public byte[] GetSerializedMessage(Message msg)

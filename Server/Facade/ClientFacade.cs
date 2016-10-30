@@ -1,4 +1,6 @@
-﻿using Proxy;
+﻿using Network;
+using Proxy;
+using Server.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,15 @@ namespace Server.Facade
 
         }
 
-        public void EnterTheGame()
+        private ISender sender;
+        public void Init(ISender sender)
         {
-            Console.WriteLine("Послано сообщение на клиент <успешный вход в игру>");
+            this.sender = sender;
+        }
+        public void EnterTheGame(int id)
+        {
+            Message msg = new Message("EnterTheGame");
+            sender.Send(id, msg);
         }
 
         public void ErrorSignIn(string message)

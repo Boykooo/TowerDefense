@@ -9,6 +9,6 @@ namespace Proxy
     public interface IClientFacade
     {
         void ErrorSignIn(string message);
-        void EnterTheGame();
+        void EnterTheGame(int id);
     }
 }

@@ -26,18 +26,20 @@ namespace Server.Facade
         }
         public void SignIn(string login, string password, int id)
         {
-
             if (db.CheckPasswod(login, password))
             {
-                clientFacade.EnterTheGame();
-
-                Message msg = new Message("Успешный вход", login);
-                sender.Send(id, msg);
+                clientFacade.EnterTheGame(id);
+                Console.WriteLine("Пользователь {0} вошел в систему", login);
             }
             else
             {
                 // А вдруг дисконект выполнится быстрее, чем отправится сообщение. Возможно ли такое?
-                clientFacade.ErrorSignIn("Неправильный пароль");
+                Console.WriteLine("Неправильный пароль у пользователя {0}", login);
+                //clientFacade.ErrorSignIn("Неправильный пароль");
+
+                Message msg = new Message("Disconnect", login);
+                sender.Send(id, msg);
+
                 Disconnect(id);
             }
 

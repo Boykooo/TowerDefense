@@ -36,6 +36,7 @@ namespace Server.ClientController
             lock(key)
             {
                 int id = idManager.GetID();
+                Console.WriteLine(id);
                 clients.Add(id, clientSocket);
                 Thread td = new Thread(() => listener.ListenClient(id, clientSocket));
                 td.Start();

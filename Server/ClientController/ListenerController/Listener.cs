@@ -4,6 +4,7 @@ using Server.ClientController.ParseMessage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,19 +31,26 @@ namespace Server.ClientController.ListenerController
         {
             byte[] data = new byte[packetLenght];
             int len;
+            EndPoint endPoint = client.RemoteEndPoint;
             try
             {
                 while (true)
                 {
+
                     len = client.Receive(data); // ???
-                    lock(lockParser)
+
+                    lock (lockParser)
                     {
                         Message msg = parser.GetMessage(data);
-                        object[] args = new object[msg.Arguments.Length + 1];
-                        msg.Arguments.CopyTo(args, 0);
-                        args[args.Length - 1] = id;
 
-                        serverFacade.GetType().GetMethod(msg.Method).Invoke(serverFacade, args); // вызов заданного метода из фасада сервера
+                        if (msg != null)
+                        {
+                            object[] args = new object[msg.Arguments.Length + 1];
+                            msg.Arguments.CopyTo(args, 0);
+                            args[args.Length - 1] = id;
+
+                            serverFacade.GetType().GetMethod(msg.Method).Invoke(serverFacade, args); // вызов заданного метода из фасада сервера
+                        }
                     }
                 }
             }
@@ -50,7 +58,7 @@ namespace Server.ClientController.ListenerController
             {
                 Disconnect(id); // отрубаем клиента от сервера
 
-                Console.WriteLine("Ошибка в слушателе");
+                Console.WriteLine("Слушатель для id = {0} отключен", id);
             }
         }
     }
