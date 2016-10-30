@@ -1,4 +1,6 @@
-﻿using Server.DB;
+﻿using Proxy;
+using Server.DB;
+using Server.Facade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +13,17 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            //ServerSocket server = new ServerSocket();
+            IClientFacade clientFacade = new ClientFacade();
 
-            //Task.Run(() => server.Start());
+            IServerFacade serverFacade = new ServerFacade(clientFacade);
 
-            DBController db = new DBController();
-            db.CheckConnect();
+            ServerSocket server = new ServerSocket(serverFacade);
+
+
+            Task.Run(() => server.Start());
+
+            //DBController db = new DBController();
+            //db.CheckConnect();
 
             while (Console.ReadLine().ToLower() != "stop") ;
         }

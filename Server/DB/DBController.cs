@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Server.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.DB
 {
-    class DBController
+    class DBController : IDBController
     {
         public DBController()
         {
@@ -15,8 +16,7 @@ namespace Server.DB
         }
 
         private MySqlConnection conn;
-        private object keySignUp = new object();
-        private object keySignIn = new object();
+        private object key = new object();
 
         private void InitConnection()
         {
@@ -78,22 +78,30 @@ namespace Server.DB
         }
         public void SignUp(string login, string password, string mail)
         {
-            lock (keySignUp)
+            lock (key)
             {
 
             }
         }
-        public void SignIn(string login, string password)
+
+        public bool CheckPasswod(string login, string password)
         {
-            lock (keySignIn)
-            {
-                OpenConnection();
+            return true;
+        }
 
+        public bool CheckFreeMail(string mail)
+        {
+            return true;
+        }
 
+        public bool CheckFreeLogin(string login)
+        {
+            return true;
+        }
 
-
-                CloseConnection();
-            }
+        public int GetID(string login)
+        {
+            return 1;
         }
     }
 }

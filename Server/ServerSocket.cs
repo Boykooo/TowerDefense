@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Proxy;
+using Server.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,18 +14,18 @@ using System.Threading.Tasks;
 namespace Server
 {
     [Serializable]
-    class ServerSocket
+    class ServerSocket : IServer
     {
-        public ServerSocket()
+        public ServerSocket(IServerFacade serverFacade)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             clients = new Dictionary<int, Socket>();
             maxQueue = 10;
             formatter = new BinaryFormatter();
+            this.serverFacade = serverFacade;
         }
 
         private Socket socket;
-        private Dictionary<int, Socket> clients;
         private const int port = 8888;
         private const int packetLenght = 5024;
         private int maxQueue;
@@ -31,12 +33,12 @@ namespace Server
         private object lck = new object();
         private BinaryFormatter formatter;
 
+        private Dictionary<int, Socket> clients;
+        private IServerFacade serverFacade;
 
-
-        public void Start()
-        {
-            AcceptNewClient();
-        }
+        public event Action<int> Disconnect = (x) => { };
+        public event Action<byte[], int> GetMessage = (x, y) => { };
+        public event Action<int> Connect = (x) => { };
 
         private void AcceptNewClient()
         {
@@ -52,42 +54,72 @@ namespace Server
                     Socket client = socket.Accept();
                     currId = id++;
 
-                    Console.WriteLine("Соединение установлено с {0}", currId);
-
-                    lock (lck)
-                    {
-                        clients.Add(id, client);
-                    }
+                    Console.WriteLine("Установлено соединение с {0}", client.RemoteEndPoint);
 
 
+                    //ThreadPool.QueueUserWorkItem((x) => ListenUser(client));
+                    //ThreadPool.QueueUserWorkItem((x) => Send(client));
 
                     Thread listenUser = new Thread(() => ListenUser(client));
                     listenUser.Start();
+                    //Thread send = new Thread(() => Send(client));
+                    //send.Start();
                 }
                 catch
                 {
 
-                    Console.WriteLine("Ошбика в коннекте слушателя");
+                    Console.WriteLine("Ошибка в коннекте нового юзера");
                 }
             }
         }
-
         private void ListenUser(Socket userSocket)
         {
             byte[] data = new byte[packetLenght];
             int len;
-
+            bool inGame = false;
+            int idUser = -1;
             try
             {
                 while (true)
                 {
-                    len = userSocket.Receive(data);
-
-                    using (MemoryStream stream = new MemoryStream(data))
+                    if (!inGame)
                     {
-                        var mesg = formatter.Deserialize(stream) as String;
 
-                        Console.WriteLine(mesg);
+
+
+                        len = userSocket.Receive(data);
+
+                        using (MemoryStream stream = new MemoryStream(data))
+                        {
+                            BinaryFormatter f = new BinaryFormatter();
+
+                            var mesg = f.Deserialize(stream) as String;
+
+                            if (mesg == "login")
+                            {
+                                serverFacade.SignIn(ref idUser, );
+                            }
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+                    else
+                    {
+                        
                     }
                 }
             }
@@ -95,6 +127,50 @@ namespace Server
             {
                 Console.WriteLine("Ошбика в слушателе");
             }
+        }
+        private void InGame(Socket userSocket)
+        {
+
+        }
+
+        private void Send(Socket userSocket)
+        {
+            try
+            {
+                string str = "hello client";
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+
+                    formatter.Serialize(stream, str);
+
+                    userSocket.Send(stream.GetBuffer());
+
+                    Console.WriteLine("Сообщение {0} отправлено", str);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Ошбика в сендере");
+            }
+
+        }
+
+        public void Start()
+        {
+            AcceptNewClient();
+        }
+        public void Send(int id, byte[] message)
+        {
+            if (clients.ContainsKey(id))
+            {
+                clients[id].Send(message);
+            }
+        }
+
+        public void NewPlayer()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Proxy;
+using Server.DB;
+using Server.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,29 @@ namespace Server.Facade
 {
     class ServerFacade : IServerFacade
     {
-        public ServerFacade()
+        public ServerFacade(IClientFacade clientFacade)
         {
-
+            this.clientFacade = clientFacade;
+            db = new DBController();
         }
 
-        public void SignIn(string login, string password)
+        private IClientFacade clientFacade;
+        private IDBController db;
+        
+
+        public void SignIn(ref int id, string login, string password)
         {
-            Console.WriteLine("Подключился {0}", login);
+            Console.WriteLine("Идет проверка входа в систему {0}", login);
+
+            if (db.CheckPasswod(login, password))
+            {
+                clientFacade.EnterTheGame();
+            }
+            else
+            {
+                clientFacade.ErrorSignIn("Неправильный пароль");
+            }
+
         }
 
         public void SignUp(string login, string password, string mail)

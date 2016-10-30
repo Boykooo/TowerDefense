@@ -53,6 +53,8 @@
     <Compile Include="DB\DBController.cs" />
     <Compile Include="Facade\ClientFacade.cs" />
     <Compile Include="Facade\ServerFacade.cs" />
+    <Compile Include="Interfaces\IDBController.cs" />
+    <Compile Include="Interfaces\IServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerSocket.cs" />
