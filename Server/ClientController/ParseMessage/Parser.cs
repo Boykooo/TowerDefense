@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.ParseMessage
+namespace Server.ClientController.ParseMessage
 {
     public class Parser
     {
@@ -20,7 +20,10 @@ namespace Server.ParseMessage
 
         public Message GetMessage(byte[] msg)
         {
-            return null;
+            using (MemoryStream stream = new MemoryStream(msg))
+            {
+                return formatter.Deserialize(stream) as Message;
+            }
         }
         public byte[] GetSerializedMessage(Message msg)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.IDManager
+namespace Server.ClientController.IdManager
 {
     public class IDManager
     {

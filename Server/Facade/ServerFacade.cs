@@ -3,10 +3,6 @@ using Proxy;
 using Server.DB;
 using Server.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Facade
 {
@@ -20,37 +16,37 @@ namespace Server.Facade
 
         private IClientFacade clientFacade;
         private IDBController db;
-        IServer server;
-        
-        public void Init(IServer server)
-        {
-            this.server = server;
-        }
+        private ISender sender;
 
+        public event Action<int> Disconnect = (x) => { };
+
+        public void Init(ISender sender)
+        {
+            this.sender = sender;
+        }
         public void SignIn(string login, string password, int id)
         {
-            Console.WriteLine("Идет проверка входа в систему {0}", login);
 
             if (db.CheckPasswod(login, password))
             {
                 clientFacade.EnterTheGame();
 
                 Message msg = new Message("Успешный вход", login);
-                server.Send(id, msg);
+                sender.Send(id, msg);
             }
             else
             {
+                // А вдруг дисконект выполнится быстрее, чем отправится сообщение. Возможно ли такое?
                 clientFacade.ErrorSignIn("Неправильный пароль");
+                Disconnect(id);
             }
 
         }
-
         public void SignUp(string login, string password, string mail, int id)
         {
             Console.WriteLine("Успешная регистрация {0}", login);
             Message msg = new Message("Успешная регистрация", login);
-            server.Send(id, msg);
-
+            sender.Send(id, msg);
         }
     }
 }

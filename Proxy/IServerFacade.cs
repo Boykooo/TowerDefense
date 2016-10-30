@@ -12,5 +12,7 @@ namespace Proxy
         void SignUp(string login, string password, string mail, int id);
 
 
+        event Action<int> Disconnect;
+
     }
 }

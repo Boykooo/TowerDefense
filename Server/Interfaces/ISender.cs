@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Interfaces
 {
-    interface IServer 
+    public interface ISender
     {
-        void Start();
+        //Отправка сообщений
+        void Send(int id, Message msg);
     }
 }
