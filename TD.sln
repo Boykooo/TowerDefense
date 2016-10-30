@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TD.CSharp.Editor", "TD.CSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{3A90F0FF-0E6B-4ED6-B3F4-71D9B6179EEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{AE19159A-6B69-4D3C-BCDD-7A4E1DEC894B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3A90F0FF-0E6B-4ED6-B3F4-71D9B6179EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A90F0FF-0E6B-4ED6-B3F4-71D9B6179EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A90F0FF-0E6B-4ED6-B3F4-71D9B6179EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE19159A-6B69-4D3C-BCDD-7A4E1DEC894B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE19159A-6B69-4D3C-BCDD-7A4E1DEC894B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE19159A-6B69-4D3C-BCDD-7A4E1DEC894B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE19159A-6B69-4D3C-BCDD-7A4E1DEC894B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
