@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Network;
 
 namespace Server
 {
@@ -93,18 +94,19 @@ namespace Server
                         {
                             BinaryFormatter f = new BinaryFormatter();
 
-                            var mesg = f.Deserialize(stream) as String;
+                            Message msg = f.Deserialize(stream) as Message;
 
-                            if (mesg == "login")
+                            if (msg.Method == "SignIn")
                             {
-                                serverFacade.SignIn(ref idUser, );
+                                serverFacade.SignIn(ref idUser, msg.Arguments[0].ToString(), msg.Arguments[1].ToString());
+                                if (id != -1)
+                                {
+                                    inGame = true;
+                                    Console.WriteLine("{0} выполнил вход в систему", msg.Arguments[0].ToString());
+                                    clients.Add(id, userSocket);
+                                }
                             }
-
                         }
-
-
-
-
 
 
 
@@ -119,7 +121,7 @@ namespace Server
                     }
                     else
                     {
-                        
+                        Console.WriteLine("Прием сообщений...");
                     }
                 }
             }

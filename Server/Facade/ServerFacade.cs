@@ -27,6 +27,7 @@ namespace Server.Facade
 
             if (db.CheckPasswod(login, password))
             {
+                id = db.GetID(login);
                 clientFacade.EnterTheGame();
             }
             else

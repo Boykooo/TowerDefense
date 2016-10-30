@@ -37,6 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 7.0.6\Assemblies\v4.5.1\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Network">
+      <HintPath>..\Network\bin\Debug\Network.dll</HintPath>
+    </Reference>
     <Reference Include="Proxy">
       <HintPath>..\Proxy\bin\Debug\Proxy.dll</HintPath>
     </Reference>
