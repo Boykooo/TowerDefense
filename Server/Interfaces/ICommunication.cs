@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace Server.Interfaces
 {
-    public interface ISender
+    public interface ICommunication
     {
         //Отправка сообщений
         void Send(int id, Message msg);
+        void Send(string login, Message msg);
+        void AddOnlineUser(string login, int id);
+        bool isOnline(string login);
     }
 }

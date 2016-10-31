@@ -16,29 +16,30 @@ namespace Server.Facade
 
         private IClientFacade clientFacade;
         private IDBController db;
-        private ISender sender;
+        private ICommunication communication;
 
         public event Action<int> Disconnect = (x) => { };
 
-        public void Init(ISender sender)
+        public void Init(ICommunication communication)
         {
-            this.sender = sender;
+            this.communication = communication;
         }
         public void SignIn(string login, string password, int id)
         {
-            if (db.CheckPasswod(login, password))
+            if (db.CheckPasswod(login, password) && !communication.isOnline(login))
             {
-                clientFacade.EnterTheGame(id);
+                communication.AddOnlineUser(login, id);
+                clientFacade.EnterTheGame(login);
                 Console.WriteLine("Пользователь {0} вошел в систему", login);
             }
             else
             {
                 // А вдруг дисконект выполнится быстрее, чем отправится сообщение. Возможно ли такое?
-                Console.WriteLine("Неправильный пароль у пользователя {0}", login);
+                Console.WriteLine("Неправильный пароль у пользователя {0} или онлайн", login);
                 //clientFacade.ErrorSignIn("Неправильный пароль");
 
                 Message msg = new Message("Disconnect", login);
-                sender.Send(id, msg);
+                communication.Send(id, msg);
 
                 Disconnect(id);
             }
@@ -48,7 +49,7 @@ namespace Server.Facade
         {
             Console.WriteLine("Успешная регистрация {0}", login);
             Message msg = new Message("Успешная регистрация", login);
-            sender.Send(id, msg);
+            communication.Send(id, msg);
         }
     }
 }

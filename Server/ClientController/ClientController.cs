@@ -8,6 +8,7 @@ using Server.ClientController.ListenerController;
 using System.Threading;
 using Proxy;
 using System;
+using System.Linq;
 
 namespace Server.ClientController
 {
@@ -16,6 +17,7 @@ namespace Server.ClientController
         public ClientController(IServerFacade serverFacade)
         {
             clients = new Dictionary<int, Socket>();
+            online = new Dictionary<string, int>();
             idManager = new IDManager();
             parser = new Parser();
 
@@ -25,15 +27,17 @@ namespace Server.ClientController
         }
 
         private Dictionary<int, Socket> clients;
+        private Dictionary<string, int> online;
         private IDManager idManager;
         private Parser parser;
         private Listener listener;
         private object key = new object();
 
 
+
         public void AddNewClient(Socket clientSocket)
         {
-            lock(key)
+            lock (key)
             {
                 int id = idManager.GetID();
                 Console.WriteLine(id);
@@ -64,6 +68,12 @@ namespace Server.ClientController
                     clients[id].Dispose();
                     clients.Remove(id);
 
+                    string login = online.FirstOrDefault(x => x.Value == id).Key;   // Очень медленно
+                    if (login != null)
+                    {
+                        online.Remove(login);
+                    }
+
                     idManager.AddID(id); // освобождаем id
 
                     Console.WriteLine("Соединение с клиентом id = {0} разорвано", id);
@@ -79,6 +89,27 @@ namespace Server.ClientController
                     clients[id].Send(parser.GetSerializedMessage(msg));
                 }
             }
+        }
+        public void Send(string login, Message msg)
+        {
+            lock (key)
+            {
+                if (online.ContainsKey(login))
+                {
+                    Send(online[login], msg);
+                }
+            }
+        }
+        public void AddOnlineUser(string login, int id)
+        {
+            lock (key)
+            {
+                online.Add(login, id);
+            }
+        }
+        public bool isOnline(string login)
+        {
+            return online.ContainsKey(login);
         }
     }
 }

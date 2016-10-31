@@ -16,15 +16,15 @@ namespace Server.Facade
 
         }
 
-        private ISender sender;
-        public void Init(ISender sender)
+        private ICommunication sender;
+        public void Init(ICommunication sender)
         {
             this.sender = sender;
         }
-        public void EnterTheGame(int id)
+        public void EnterTheGame(string login)
         {
             Message msg = new Message("EnterTheGame");
-            sender.Send(id, msg);
+            sender.Send(login, msg);
         }
 
         public void ErrorSignIn(string message)

@@ -61,7 +61,7 @@
     <Compile Include="ClientController\IDManager\IDManager.cs" />
     <Compile Include="Interfaces\IDBController.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
-    <Compile Include="Interfaces\ISender.cs" />
+    <Compile Include="Interfaces\ICommunication.cs" />
     <Compile Include="Interfaces\IServer.cs" />
     <Compile Include="ClientController\ParseMessage\Parser.cs" />
     <Compile Include="Program.cs" />
