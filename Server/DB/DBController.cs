@@ -1,10 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
+using Server.DB.Model;
 using Server.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.DB
 {
@@ -83,45 +81,54 @@ namespace Server.DB
         {
             lock (key)
             {
+                using (var model = new TDModel())
+                {
+                    Users newUser = new Users();
+                    newUser.Login = login;
+                    newUser.Password = password;
+                    newUser.Mail = mail;
+                    newUser.Reg_date = DateTime.Now.Date;
+
+                    model.users.Add(newUser);
+
+                    model.SaveChanges();
+                }
 
             }
         }
         public bool CheckPasswod(string login, string password)
         {
-            OpenConnection();
+            using (var model = new TDModel())
+            {
+                var res = model.users.FirstOrDefault(user => user.Login == login && user.Password == password);
 
-            MySqlCommand request = new MySqlCommand();
-            request.CommandText = "SELECT * FROM user_reg_data where Login = @login and Password = @password; ";
-            request.Parameters.AddWithValue("@login", login);
-            request.Parameters.AddWithValue("@password", password);
-            request.Connection = conn;
-
-            bool result = request.ExecuteReader().HasRows;
-
-            CloseConnection();
-
-            return result;
+                return res == null;
+            }
         }
         public bool CheckFreeMail(string mail)
         {
-            MySqlCommand request = new MySqlCommand();
-            request.CommandText = "SELECT * FROM user_reg_data where Mail = @mail; ";
-            request.Parameters.AddWithValue("@mail", mail);
-            request.Connection = conn;
-
             lock (key)
             {
-                OpenConnection();
-                bool result = request.ExecuteReader().HasRows;
-                CloseConnection();
+                using (var model = new TDModel())
+                {
+                    Users res = model.users.FirstOrDefault(user => user.Mail == mail);
 
-                return true;
+                    return res == null;
+                }
             }
 
         }
         public bool CheckFreeLogin(string login)
         {
-            return true;
+            lock (key)
+            {
+                using (var model = new TDModel())
+                {
+                    Users res = model.users.FirstOrDefault(user => user.Login == login);
+
+                    return res == null;
+                }
+            }
         }
     }
 }

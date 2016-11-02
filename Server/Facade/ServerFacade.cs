@@ -58,6 +58,7 @@ namespace Server.Facade
             {
                 if (db.CheckFreeLogin(login))
                 {
+                    db.SignUp(login, password, mail);
                     clientFacade.SuccessfulSignUp(id);
                 }
                 else
