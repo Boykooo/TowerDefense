@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Server.Facade
 {
-    public class ClientFacade : IClientFacade
+    public class ClientFacade : IClientFacadeServer
     {
         public ClientFacade()
         {
@@ -17,19 +17,31 @@ namespace Server.Facade
         }
 
         private ICommunication sender;
+
         public void Init(ICommunication sender)
         {
             this.sender = sender;
         }
-        public void EnterTheGame(string login)
+        public void EnterTheGame(int id, string login)
         {
-            Message msg = new Message("EnterTheGame");
-            sender.Send(login, msg);
+            Message msg = new Message("EnterTheGame", login);
+            sender.Send(id, msg);
+        }
+        public void ErrorSignIn(int id, string message)
+        {
+            Message msg = new Message("ErrorSignIn", message);
+            sender.Send(id, msg);
         }
 
-        public void ErrorSignIn(string message)
+        public void ErrorSignUp(int id, string error)
         {
-            Console.WriteLine("Послано сообщение на клиент <{0}>", message);
+            Message msg = new Message("ErrorSignUp", error);
+            sender.Send(id, msg);
+        }
+        public void SuccessfulSignUp(int id)
+        {
+            Message msg = new Message("SuccessfulSignUp");
+            sender.Send(id, msg);
         }
     }
 }

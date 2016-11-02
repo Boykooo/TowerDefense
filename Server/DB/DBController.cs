@@ -30,14 +30,18 @@ namespace Server.DB
         }
         private void OpenConnection()
         {
-            try
+            lock (key)
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                }
+                catch
+                {
+                    Console.WriteLine("------   Ошибка при подключении к удаленной бд...    ------");
+                }
             }
-            catch
-            {
-                Console.WriteLine("------   Ошибка при подключении к удаленной бд...    ------");
-            }
+
         }
         private void CloseConnection()
         {
@@ -47,20 +51,19 @@ namespace Server.DB
             }
         }
 
-
         public void CheckConnect()
         {
 
             try
             {
                 conn.Open();
-                string sql = "SELECT * FROM user_reg_data"; 
+                string sql = "SELECT * FROM user_reg_data";
                 MySqlCommand script = new MySqlCommand(sql, conn);
                 MySqlDataReader data = script.ExecuteReader();
 
                 data.Read();
 
-                int id = (int) data["ID"];
+                int id = (int)data["ID"];
                 string login = data["Login"].ToString();
                 string password = data["Password"].ToString();
                 string mail = data["Mail"].ToString();
@@ -83,40 +86,42 @@ namespace Server.DB
 
             }
         }
-
         public bool CheckPasswod(string login, string password)
         {
-            lock(key)
-            {
-                OpenConnection();
+            OpenConnection();
 
-                MySqlCommand request = new MySqlCommand();
-                request.CommandText = "SELECT * FROM user_reg_data where Login = @login and Password = @password; ";
-                request.Parameters.AddWithValue("@login", login);
-                request.Parameters.AddWithValue("@password", password);
-                request.Connection = conn;
+            MySqlCommand request = new MySqlCommand();
+            request.CommandText = "SELECT * FROM user_reg_data where Login = @login and Password = @password; ";
+            request.Parameters.AddWithValue("@login", login);
+            request.Parameters.AddWithValue("@password", password);
+            request.Connection = conn;
 
-                bool result = request.ExecuteReader().HasRows;
+            bool result = request.ExecuteReader().HasRows;
 
-                CloseConnection();
+            CloseConnection();
 
-                return result;
-            }
+            return result;
         }
-
         public bool CheckFreeMail(string mail)
         {
-            return true;
-        }
+            MySqlCommand request = new MySqlCommand();
+            request.CommandText = "SELECT * FROM user_reg_data where Mail = @mail; ";
+            request.Parameters.AddWithValue("@mail", mail);
+            request.Connection = conn;
 
+            lock (key)
+            {
+                OpenConnection();
+                bool result = request.ExecuteReader().HasRows;
+                CloseConnection();
+
+                return true;
+            }
+
+        }
         public bool CheckFreeLogin(string login)
         {
             return true;
-        }
-
-        public int GetID(string login)
-        {
-            return 1;
         }
     }
 }

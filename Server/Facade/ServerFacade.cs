@@ -8,13 +8,13 @@ namespace Server.Facade
 {
     class ServerFacade : IServerFacade
     {
-        public ServerFacade(IClientFacade clientFacade)
+        public ServerFacade(IClientFacadeServer clientFacade)
         {
             this.clientFacade = clientFacade;
             db = new DBController();
         }
 
-        private IClientFacade clientFacade;
+        private IClientFacadeServer clientFacade;
         private IDBController db;
         private ICommunication communication;
 
@@ -24,32 +24,54 @@ namespace Server.Facade
         {
             this.communication = communication;
         }
+
+        // Вход в систему
         public void SignIn(string login, string password, int id)
         {
-            if (db.CheckPasswod(login, password) && !communication.isOnline(login))
+            if (db.CheckPasswod(login, password))
             {
-                communication.AddOnlineUser(login, id);
-                clientFacade.EnterTheGame(login);
-                Console.WriteLine("Пользователь {0} вошел в систему", login);
+                if (!communication.isOnline(login))
+                {
+                    communication.AddOnlineUser(id, login);
+                    clientFacade.EnterTheGame(id, login);
+                    Console.WriteLine("Пользователь {0} вошел в систему", login);
+                }
+                else
+                {
+                    clientFacade.ErrorSignIn(id, "Пользователь уже в сети");
+                    Disconnect(id);
+                }
             }
             else
             {
-                // А вдруг дисконект выполнится быстрее, чем отправится сообщение. Возможно ли такое?
-                Console.WriteLine("Неправильный пароль у пользователя {0} или онлайн", login);
-                //clientFacade.ErrorSignIn("Неправильный пароль");
-
-                Message msg = new Message("Disconnect", login);
-                communication.Send(id, msg);
-
+                clientFacade.ErrorSignIn(id, "Неправильная комбинация логина и пароля");
                 Disconnect(id);
             }
 
         }
+
+        // Регистрация в системе
         public void SignUp(string login, string password, string mail, int id)
         {
-            Console.WriteLine("Успешная регистрация {0}", login);
-            Message msg = new Message("Успешная регистрация", login);
-            communication.Send(id, msg);
+
+            if (db.CheckFreeMail(mail))
+            {
+                if (db.CheckFreeLogin(login))
+                {
+                    clientFacade.SuccessfulSignUp(id);
+                }
+                else
+                {
+                    clientFacade.ErrorSignUp(id, "Логин занят");
+                    Disconnect(id);
+                }
+            }
+            else
+            {
+                clientFacade.ErrorSignUp(id, "Данный почтовый адресс уже занят");
+                Disconnect(id);
+            }
+
         }
     }
 }

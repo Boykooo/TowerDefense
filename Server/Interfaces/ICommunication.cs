@@ -1,9 +1,4 @@
 ﻿using Network;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Interfaces
 {
@@ -11,8 +6,9 @@ namespace Server.Interfaces
     {
         //Отправка сообщений
         void Send(int id, Message msg);
-        void Send(string login, Message msg);
-        void AddOnlineUser(string login, int id);
+
+        // Действия со списком онлайн юзеров
+        void AddOnlineUser(int id, string login);
         bool isOnline(string login);
     }
 }

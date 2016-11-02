@@ -17,7 +17,5 @@ namespace Server.Interfaces
         bool CheckFreeLogin(string login);
         void SignUp(string login, string password, string mail);
 
-        int GetID(string login);
-        
     }
 }

@@ -8,7 +8,6 @@ using Server.ClientController.ListenerController;
 using System.Threading;
 using Proxy;
 using System;
-using System.Linq;
 
 namespace Server.ClientController
 {
@@ -17,23 +16,22 @@ namespace Server.ClientController
         public ClientController(IServerFacade serverFacade)
         {
             clients = new Dictionary<int, Socket>();
-            online = new Dictionary<string, int>();
             idManager = new IDManager();
             parser = new Parser();
 
             serverFacade.Disconnect += (x) => RemoveClient(x);
             listener = new Listener(serverFacade);
             listener.Disconnect += (x) => RemoveClient(x);
+            onlineUser = new Dictionary<int, string>();
         }
 
         private Dictionary<int, Socket> clients;
-        private Dictionary<string, int> online;
+        private Dictionary<int, string> onlineUser;
         private IDManager idManager;
         private Parser parser;
         private Listener listener;
         private object key = new object();
-
-
+        private object onlineKey = new object();
 
         public void AddNewClient(Socket clientSocket)
         {
@@ -65,18 +63,15 @@ namespace Server.ClientController
                 // затестить
                 if (clients.ContainsKey(id))
                 {
+                    Console.WriteLine("Соединение с клиентом {0} разорвано", clients[id].RemoteEndPoint);
+
                     clients[id].Dispose();
                     clients.Remove(id);
-
-                    string login = online.FirstOrDefault(x => x.Value == id).Key;   // Очень медленно
-                    if (login != null)
-                    {
-                        online.Remove(login);
-                    }
-
                     idManager.AddID(id); // освобождаем id
-
-                    Console.WriteLine("Соединение с клиентом id = {0} разорвано", id);
+                }
+                if (onlineUser.ContainsKey(id))
+                {
+                    onlineUser.Remove(id);
                 }
             }
         }
@@ -90,26 +85,20 @@ namespace Server.ClientController
                 }
             }
         }
-        public void Send(string login, Message msg)
+
+        public void AddOnlineUser(int id, string login)
         {
-            lock (key)
+            lock (onlineKey)
             {
-                if (online.ContainsKey(login))
-                {
-                    Send(online[login], msg);
-                }
-            }
-        }
-        public void AddOnlineUser(string login, int id)
-        {
-            lock (key)
-            {
-                online.Add(login, id);
+                onlineUser.Add(id, login);
             }
         }
         public bool isOnline(string login)
         {
-            return online.ContainsKey(login);
+            lock (onlineKey)
+            {
+                return onlineUser.ContainsValue(login);
+            }
         }
     }
 }
