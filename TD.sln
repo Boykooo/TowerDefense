@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TD.CSharp", "TD.CSharp.csproj", "{D0227560-74C3-F098-CD73-DF50421C9A77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TD.CSharp.Editor", "TD.CSharp.Editor.csproj", "{52102092-161C-74B7-161A-5F3D40DFAAD4}"
