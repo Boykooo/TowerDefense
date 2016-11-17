@@ -1,14 +1,8 @@
-﻿using Proxy;
-using Server.Interfaces;
+﻿using Server.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading;
 using Network;
-using Server.ClientController.ParseMessage;
 
 namespace Server
 {
