@@ -64,11 +64,13 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Network">
-      <HintPath>..\Network\bin\Debug\Network.dll</HintPath>
+    <Reference Include="Network, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assets\DLL\Network.dll</HintPath>
     </Reference>
-    <Reference Include="Proxy">
-      <HintPath>..\Proxy\bin\Debug\Proxy.dll</HintPath>
+    <Reference Include="Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assets\DLL\Proxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
