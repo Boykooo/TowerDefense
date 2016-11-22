@@ -129,9 +129,7 @@
     <Compile Include="Assets\Scripts\GameCore\Towers\AbstractClasses\BaseTower.cs" />
     <Compile Include="Assets\Scripts\GameCore\Towers\Interfaces\ITower.cs" />
     <Compile Include="Assets\Scripts\GameCore\Towers\TowersTypes\StandartTower.cs" />
-    <Compile Include="Assets\Scripts\ScenesScripts\Battle.cs" />
-    <Compile Include="Assets\Scripts\ScenesScripts\MapCameraController.cs" />
-    <Compile Include="Assets\Scripts\ScenesScripts\ShowContent.cs" />
+    <Compile Include="Assets\Scripts\ScenesScripts\MenuController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AllTextures\DETAILS\Documents\Fantasy Treasure Loot Kit user guide.txt" />
