@@ -1,33 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-
-    private void Start()
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+    
+    public void EnterTheGame()
     {
 
     }
 
-    public GUISkin q;
-    public Texture signInTexture;
-
-    private void Update()
+    public void Registration()
     {
 
-    }
-    private void OnGUI()
-    {
-        GUI.skin = q;
-        if (GUI.Button(new Rect(200, 200, 100, 100), signInTexture))
-        {
-
-        }
-
-
-
-
-
-        
     }
 }
