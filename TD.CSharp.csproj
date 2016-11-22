@@ -122,7 +122,7 @@
     <Compile Include="Assets\Scripts\Base\BaseLevelScripts\TimeTide.cs" />
     <Compile Include="Assets\Scripts\Base\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Base\FPS.cs" />
-    <Compile Include="Assets\Scripts\Client\ClientController.cs" />
+    <Compile Include="Assets\Scripts\Client\ServerFacade.cs" />
     <Compile Include="Assets\Scripts\Client\ClientFacade.cs" />
     <Compile Include="Assets\Scripts\GUI\Graphic.cs" />
     <Compile Include="Assets\Scripts\GameCore\Logic\AI\MobAI.cs" />

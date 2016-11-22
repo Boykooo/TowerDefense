@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Network;
 using System.Net.Sockets;
-using Server.ServerComponents.IdManager;
-using Server.ServerComponents.ListenerController;
+using Server.ClientController.IdManager;
+using Server.ClientController.ListenerController;
 using System.Threading;
 using Proxy;
 using System;
 
-namespace Server.ServerComponents
+namespace Server.ClientController
 {
     public class ServerController : IServerController
     {
