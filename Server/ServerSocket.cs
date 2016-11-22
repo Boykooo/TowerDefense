@@ -9,7 +9,7 @@ namespace Server
     [Serializable]
     class ServerSocket : IServer
     {
-        public ServerSocket(IClientController clientController)
+        public ServerSocket(IServerController clientController)
         {
             this.clientController = clientController;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -22,7 +22,7 @@ namespace Server
         private const int port = 8888;
         private int maxQueue;
 
-        private IClientController clientController;
+        private IServerController clientController;
         private Parser parser;
 
         private void AcceptNewClient()

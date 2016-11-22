@@ -4,7 +4,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Server.ClientController.ListenerController
+namespace Server.ServerComponents.ListenerController
 {
     public class Listener
     {

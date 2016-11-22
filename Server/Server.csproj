@@ -85,8 +85,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientController\ClientController.cs" />
-    <Compile Include="ClientController\ListenerController\Listener.cs" />
+    <Compile Include="ServerComponents\ServerController.cs" />
+    <Compile Include="ServerComponents\ListenerController\Listener.cs" />
     <Compile Include="DB\DBController.cs" />
     <Compile Include="DB\Model\TDModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -108,9 +108,9 @@
     </Compile>
     <Compile Include="Facade\ClientFacade.cs" />
     <Compile Include="Facade\ServerFacade.cs" />
-    <Compile Include="ClientController\IDManager\IDManager.cs" />
+    <Compile Include="ServerComponents\IDManager\IDManager.cs" />
     <Compile Include="Interfaces\IDBController.cs" />
-    <Compile Include="Interfaces\IClientController.cs" />
+    <Compile Include="Interfaces\IServerController.cs" />
     <Compile Include="Interfaces\ICommunication.cs" />
     <Compile Include="Interfaces\IServer.cs" />
     <Compile Include="Program.cs" />

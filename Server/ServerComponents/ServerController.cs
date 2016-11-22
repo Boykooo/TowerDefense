@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using Network;
 using System.Net.Sockets;
-using Server.ClientController.IdManager;
-using Server.ClientController.ListenerController;
+using Server.ServerComponents.IdManager;
+using Server.ServerComponents.ListenerController;
 using System.Threading;
 using Proxy;
 using System;
 
-namespace Server.ClientController
+namespace Server.ServerComponents
 {
-    public class ClientController : IClientController
+    public class ServerController : IServerController
     {
-        public ClientController(IServerFacade serverFacade)
+        public ServerController(IServerFacade serverFacade)
         {
             clients = new Dictionary<int, Socket>();
             idManager = new IDManager();

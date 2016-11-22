@@ -3,7 +3,7 @@ using Server.Facade;
 using Server.Interfaces;
 using System;
 using System.Threading.Tasks;
-using Server.ClientController;
+using Server.ServerComponents;
 
 namespace Server
 {
@@ -16,7 +16,7 @@ namespace Server
 
             ServerFacade serverFacade = new ServerFacade(clientFacade);
 
-            IClientController clientController = new ClientController.ClientController(serverFacade);
+            IServerController clientController = new ServerComponents.ServerController(serverFacade);
 
             IServer server = new ServerSocket(clientController);
 

@@ -2,7 +2,7 @@
 
 namespace Server.Interfaces
 {
-    public interface IClientController : ICommunication
+    public interface IServerController : ICommunication
     {
         //Действия со словарем клиентов
         void AddNewClient(Socket clientSocket);
