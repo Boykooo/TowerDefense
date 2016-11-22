@@ -66,11 +66,11 @@
     </Reference>
     <Reference Include="Network, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assets\DLL\Network.dll</HintPath>
+      <HintPath>..\Assets\DLL\Network\Network.dll</HintPath>
     </Reference>
     <Reference Include="Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Assets\DLL\Proxy.dll</HintPath>
+      <HintPath>..\Assets\DLL\Proxy\Proxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
