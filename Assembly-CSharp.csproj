@@ -92,10 +92,14 @@
      <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\environment\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\environment\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\environment\Water\Water\Scripts\WaterTile.cs" />
-     <Compile Include="Assets\AllTextures\Prefabs\Ammo\Arrow\ArrowMove.cs" />
+     <Compile Include="Assets\Scripts\ArrowMove.cs" />
      <Compile Include="Assets\Scripts\Base\BaseLevelScripts\TimeTide.cs" />
      <Compile Include="Assets\Scripts\Base\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Base\FPS.cs" />
+     <Compile Include="Assets\Scripts\Client\ClientController.cs" />
+     <Compile Include="Assets\Scripts\Client\ClientFacade.cs" />
+     <Compile Include="Assets\Scripts\Client\Listener.cs" />
+     <Compile Include="Assets\Scripts\Client\Sender.cs" />
      <Compile Include="Assets\Scripts\GUI\Graphic.cs" />
      <Compile Include="Assets\Scripts\GameCore\Logic\AI\MobAI.cs" />
      <Compile Include="Assets\Scripts\GameCore\Logic\AI\SpawnerAI.cs" />
@@ -113,6 +117,8 @@
      <Compile Include="Assets\Scripts\GameCore\Towers\TowersTypes\StandartTower.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Battle.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\MapCameraController.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\Menu\MenuController.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\Menu\MessageBox.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\ShowContent.cs" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
@@ -194,6 +200,12 @@
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="Proxy">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Proxy/Proxy.dll</HintPath>
+ </Reference>
+ <Reference Include="Network">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Network/Network.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

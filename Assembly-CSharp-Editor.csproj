@@ -133,6 +133,9 @@
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -162,6 +165,12 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Proxy">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Proxy/Proxy.dll</HintPath>
+ </Reference>
+ <Reference Include="Network">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Network/Network.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
