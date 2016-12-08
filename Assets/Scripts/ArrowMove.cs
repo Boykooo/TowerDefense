@@ -29,6 +29,7 @@ public class ArrowMove : MonoBehaviour
             //transform.Translate(direction * Time.deltaTime * speed);
 
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
         }
         else
         {
