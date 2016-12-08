@@ -41,7 +41,7 @@ namespace Server.DB
             {
                 var res = model.users.FirstOrDefault(user => user.Login == login && user.Password == password);
 
-                return res == null;
+                return res != null;
             }
         }
         public bool CheckFreeMail(string mail)

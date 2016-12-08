@@ -7,6 +7,7 @@ using UnityEngine;
 using Assets.GameCore.Turrets.AbstractClasses;
 using Assets.GameCore.Turrets.TurretsTypes;
 using Assets.GameCore.Logic.Enums;
+using Assets.GameCore.Logic.SettingScene;
 
 namespace Assets.Core.Logic.Controllers
 {
@@ -53,10 +54,19 @@ namespace Assets.Core.Logic.Controllers
         {
             wayPoints = new Vector3[]
             {
-                new Vector3(19,0,95),
-                new Vector3(19,0,45),
-                new Vector3(92,0,45),
-                new Vector3(92,0,5),
+                new Vector3(100,0,300),
+                new Vector3(180,0,300),
+                new Vector3(180,0,260),
+                new Vector3(130,0,260),
+                new Vector3(130,0,225),
+                new Vector3(300,0,225),
+                new Vector3(300,0,265),
+                new Vector3(385,0,265),
+                new Vector3(385,0,165),
+                new Vector3(205,0,165),
+                new Vector3(205,0,115),
+                new Vector3(205,0,108),
+                new Vector3(142,0,108),
             };
         }
         public GameObject GetTowerObject(TowerType towerType)

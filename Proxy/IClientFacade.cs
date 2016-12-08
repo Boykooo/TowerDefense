@@ -6,7 +6,7 @@ namespace Proxy
         void ErrorSignIn(string message);
         void EnterTheGame(string login);
 
-        void ErrorSignUp(string error);
+        void ErrorSignUp(string message);
         void SuccessfulSignUp();
     }
 }

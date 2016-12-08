@@ -85,7 +85,7 @@ public class Graphic : MonoBehaviour
             currTower = TowerType.StandartTower;
         }
 
-        GUI.Box(playerStats, "Player Stats");
-        GUI.Label(playerStatsPlayerMoney, "Money: " + gameController.PlayerMoney + "монеток");
+        //GUI.Box(playerStats, "Player Stats");
+        //GUI.Label(playerStatsPlayerMoney, "Money: " + gameController.PlayerMoney + "монеток");
     }
 }

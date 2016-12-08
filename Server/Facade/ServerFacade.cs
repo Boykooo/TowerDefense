@@ -44,6 +44,7 @@ namespace Server.Facade
             }
             else
             {
+                Console.WriteLine("Пользователь {0} ввел неправильный пароль", login);
                 clientFacade.ErrorSignIn(id, "Неправильная комбинация логина и пароля");
                 Disconnect(id);
             }

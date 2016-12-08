@@ -47,6 +47,7 @@ namespace Assets.Core.Mobs.Skripts
                     if (waveNumber < maximumWaves) //если не достигнут предел количества волн
                     {
                         Instantiate(Mob, gControl.wayPoints[0], Quaternion.identity); //спауним моба
+                        gControl.MobCount++;
                         waveDelayTimer = 2;
                     }
                 }

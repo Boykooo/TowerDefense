@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,11 +61,11 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Proxy">
-      <HintPath>Assets\DLL\Proxy\Proxy.dll</HintPath>
-    </Reference>
     <Reference Include="Network">
       <HintPath>Assets\DLL\Network\Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Proxy">
+      <HintPath>Assets\DLL\Proxy\Proxy.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -118,12 +116,14 @@
     <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
     <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
     <Compile Include="Assets\AllTextures\LANDSCAPE\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
-    <Compile Include="Assets\AllTextures\Prefabs\Ammo\Arrow\ArrowMove.cs" />
+    <Compile Include="Assets\Scripts\ArrowMove.cs" />
     <Compile Include="Assets\Scripts\Base\BaseLevelScripts\TimeTide.cs" />
     <Compile Include="Assets\Scripts\Base\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Base\FPS.cs" />
-    <Compile Include="Assets\Scripts\Client\ServerFacade.cs" />
+    <Compile Include="Assets\Scripts\Client\ClientController.cs" />
     <Compile Include="Assets\Scripts\Client\ClientFacade.cs" />
+    <Compile Include="Assets\Scripts\Client\Listener.cs" />
+    <Compile Include="Assets\Scripts\Client\Sender.cs" />
     <Compile Include="Assets\Scripts\GUI\Graphic.cs" />
     <Compile Include="Assets\Scripts\GameCore\Logic\AI\MobAI.cs" />
     <Compile Include="Assets\Scripts\GameCore\Logic\AI\SpawnerAI.cs" />
@@ -142,6 +142,7 @@
     <Compile Include="Assets\Scripts\ScenesScripts\Battle.cs" />
     <Compile Include="Assets\Scripts\ScenesScripts\MapCameraController.cs" />
     <Compile Include="Assets\Scripts\ScenesScripts\Menu\MenuController.cs" />
+    <Compile Include="Assets\Scripts\ScenesScripts\Menu\MessageBox.cs" />
     <Compile Include="Assets\Scripts\ScenesScripts\ShowContent.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -88,11 +88,14 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Network">
+      <HintPath>Assets\DLL\Network\Network.dll</HintPath>
+    </Reference>
     <Reference Include="Proxy">
       <HintPath>Assets\DLL\Proxy\Proxy.dll</HintPath>
     </Reference>
-    <Reference Include="Network">
-      <HintPath>Assets\DLL\Network\Network.dll</HintPath>
+    <Reference Include="Assembly-UnityScript">
+      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
