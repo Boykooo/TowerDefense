@@ -201,11 +201,11 @@
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
- <Reference Include="Proxy">
- <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Proxy/Proxy.dll</HintPath>
- </Reference>
  <Reference Include="Network">
  <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Network/Network.dll</HintPath>
+ </Reference>
+ <Reference Include="Proxy">
+ <HintPath>C:/Users/Полина/Source/Repos/TowerDefense/Assets/DLL/Proxy/Proxy.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
