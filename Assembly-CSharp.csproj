@@ -108,14 +108,15 @@
      <Compile Include="Assets\Scripts\GameCore\Logic\Enums\ClickState.cs" />
      <Compile Include="Assets\Scripts\GameCore\Logic\Enums\TowerType.cs" />
      <Compile Include="Assets\Scripts\GameCore\Logic\Interfaces\IGameController.cs" />
-     <Compile Include="Assets\Scripts\GameCore\Logic\SettingScene\SettingScene.cs" />
      <Compile Include="Assets\Scripts\GameCore\Mobs\AbstractClasses\BaseMob.cs" />
      <Compile Include="Assets\Scripts\GameCore\Mobs\Interfaces\IMob.cs" />
      <Compile Include="Assets\Scripts\GameCore\Mobs\MobsTypes\Mob_War.cs" />
+     <Compile Include="Assets\Scripts\GameCore\SettingScene\SettingScene.cs" />
      <Compile Include="Assets\Scripts\GameCore\Towers\AbstractClasses\BaseTower.cs" />
      <Compile Include="Assets\Scripts\GameCore\Towers\Interfaces\ITower.cs" />
      <Compile Include="Assets\Scripts\GameCore\Towers\TowersTypes\StandartTower.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Battle.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\LibraryButton.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\MapCameraController.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Menu\MenuController.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Menu\MessageBox.cs" />
