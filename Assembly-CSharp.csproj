@@ -115,12 +115,13 @@
      <Compile Include="Assets\Scripts\GameCore\Towers\AbstractClasses\BaseTower.cs" />
      <Compile Include="Assets\Scripts\GameCore\Towers\Interfaces\ITower.cs" />
      <Compile Include="Assets\Scripts\GameCore\Towers\TowersTypes\StandartTower.cs" />
-     <Compile Include="Assets\Scripts\ScenesScripts\Battle.cs" />
-     <Compile Include="Assets\Scripts\ScenesScripts\LibraryButton.cs" />
-     <Compile Include="Assets\Scripts\ScenesScripts\MapCameraController.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\MapScene\Battle.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\MapScene\MapMenu\LibraryButton.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\MapScene\MapMenu\TowerDrawing.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\MapScene\ShowContent.cs" />
+     <Compile Include="Assets\Scripts\ScenesScripts\Menu\MapCameraController.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Menu\MenuController.cs" />
      <Compile Include="Assets\Scripts\ScenesScripts\Menu\MessageBox.cs" />
-     <Compile Include="Assets\Scripts\ScenesScripts\ShowContent.cs" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\AllTextures\LANDSCAPE\Standard Assets\effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
