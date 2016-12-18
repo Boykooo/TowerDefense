@@ -8,7 +8,7 @@ public class LibraryButton : MonoBehaviour {
     public Texture2D spell;
     
     int boxWidth = 500;
-    int boxHeigt = 300;
+    int boxHeigt = 350;
     // Use this for initialization
     void Start () {
         showMenu = false;
@@ -32,11 +32,11 @@ public class LibraryButton : MonoBehaviour {
 
             int cost = 15;
             spell = Resources.Load("LibrarySpells/Spell0") as Texture2D;
-            GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt), spell);
+            GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt),spell);
             GUI.Label(new Rect(x, y + 90, 80, 35), string.Format("{0} монет", cost));
-            if (GUI.Button(new Rect(x, y + 130, 80, 25), "Купить"))
+            if (GUI.Button(new Rect(x, y + 130, 80, 25), new GUIContent("Купить", "Заклинание позволяет кидать огненные шары в монстров")))
             {
-               //отправляем запрос на покупку
+                //отправляем запрос на покупку
             }
             x += spellWidth + 10;
 
@@ -44,7 +44,7 @@ public class LibraryButton : MonoBehaviour {
             spell = Resources.Load("LibrarySpells/Spell1") as Texture2D;
             GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt), spell);
             GUI.Label(new Rect(x, y + 90, 80, 35), string.Format("{0} монет", cost));
-            if (GUI.Button(new Rect(x, y + 130, 80, 25), "Купить"))
+            if (GUI.Button(new Rect(x, y + 130, 80, 25), new GUIContent("Купить" , "Заклинание увеличивает скорость атаки башен на 50% ")))
             {
 
             }
@@ -54,7 +54,7 @@ public class LibraryButton : MonoBehaviour {
             spell = Resources.Load("LibrarySpells/Spell2") as Texture2D;
             GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt), spell);
             GUI.Label(new Rect(x, y + 90, 80, 35), string.Format("{0} монет", cost));
-            if (GUI.Button(new Rect(x, y + 130, 80, 25), "Купить"))
+            if (GUI.Button(new Rect(x, y + 130, 80, 25), new GUIContent("Купить", "Заклинание увеличивает урон, наносимый монстрам на 50%")))
              {
 
             }
@@ -64,7 +64,7 @@ public class LibraryButton : MonoBehaviour {
             spell = Resources.Load("LibrarySpells/Spell3") as Texture2D;
             GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt), spell);
             GUI.Label(new Rect(x, y + 90, 80, 35), string.Format("{0} монет", cost));
-            if (GUI.Button(new Rect(x, y + 130, 80, 25), "Купить"))
+            if (GUI.Button(new Rect(x, y + 130, 80, 25), new GUIContent("Купить", "Заклинание замедляет монстров на 30% ")))
             {
 
             }
@@ -74,13 +74,14 @@ public class LibraryButton : MonoBehaviour {
             spell = Resources.Load("LibrarySpells/Spell4") as Texture2D;
             GUI.DrawTexture(new Rect(x, y, spellWidth, spellHeigt), spell);
             GUI.Label(new Rect(x, y + 90, 80, 35), string.Format("{0} монет", cost));
-            if(GUI.Button(new Rect(x, y + 130, 80, 25), "Купить"))
+            if(GUI.Button(new Rect(x, y + 130, 80, 25), new GUIContent("Купить", "Заклинание ")))
             {
 
             }
+            GUI.Label(new Rect(Screen.width / 2 - boxWidth / 2, y + 150, 500,80), GUI.tooltip);
             x += spellWidth + 10;
 
-            if (GUI.Button(new Rect(Screen.width / 2 - 90, Screen.height / 2 + 90, 180, 30), "Выход"))
+            if (GUI.Button(new Rect(Screen.width / 2 - 90, Screen.height / 2 + 110, 180, 30), "Выход"))
             {
                 useGUILayout = false;
                 showMenu = false;
