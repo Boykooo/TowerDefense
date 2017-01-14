@@ -13,10 +13,10 @@ namespace Server.DB.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TDModel : DbContext
+    public partial class DBModel : DbContext
     {
-        public TDModel()
-            : base("name=TDModel")
+        public DBModel()
+            : base("name=DBModel")
         {
         }
     
@@ -25,6 +25,12 @@ namespace Server.DB.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Users> users { get; set; }
+        public virtual DbSet<battle> battle { get; set; }
+        public virtual DbSet<level> level { get; set; }
+        public virtual DbSet<resource> resource { get; set; }
+        public virtual DbSet<spell> spell { get; set; }
+        public virtual DbSet<tower> tower { get; set; }
+        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<user_resource> user_resource { get; set; }
     }
 }

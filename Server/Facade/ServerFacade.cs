@@ -54,25 +54,26 @@ namespace Server.Facade
         // Регистрация в системе
         public void SignUp(string login, string password, string mail, int id)
         {
+            clientFacade.EnterTheGame(id, login);
 
-            if (db.CheckFreeMail(mail))
-            {
-                if (db.CheckFreeLogin(login))
-                {
-                    db.SignUp(login, password, mail);
-                    clientFacade.SuccessfulSignUp(id);
-                }
-                else
-                {
-                    clientFacade.ErrorSignUp(id, "Логин занят");
-                    Disconnect(id);
-                }
-            }
-            else
-            {
-                clientFacade.ErrorSignUp(id, "Данный почтовый адресс уже занят");
-                Disconnect(id);
-            }
+            //if (db.CheckFreeMail(mail))
+            //{
+            //    if (db.CheckFreeLogin(login))
+            //    {
+            //        db.SignUp(login, password, mail);
+            //        clientFacade.SuccessfulSignUp(id);
+            //    }
+            //    else
+            //    {
+            //        clientFacade.ErrorSignUp(id, "Логин занят");
+            //        Disconnect(id);
+            //    }
+            //}
+            //else
+            //{
+            //    clientFacade.ErrorSignUp(id, "Данный почтовый адресс уже занят");
+            //    Disconnect(id);
+            //}
 
         }
     }

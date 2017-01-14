@@ -3,6 +3,8 @@ using Server.DB.Model;
 using Server.Interfaces;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Server.DB
 {
@@ -10,25 +12,25 @@ namespace Server.DB
     {
         public DBController()
         {
-            model = new TDModel();
+            model = new DBModel();
         }
 
-        private TDModel model;
+        private DBModel model;
         private object key = new object();
 
         public void SignUp(string login, string password, string mail)
         {
             lock (key)
             {
-                using (var model = new TDModel())
+                using (var model = new DBModel())
                 {
-                    Users newUser = new Users();
-                    newUser.Login = login;
-                    newUser.Password = password;
-                    newUser.Mail = mail;
-                    newUser.Reg_date = DateTime.Now.Date;
+                    user newUser = new user();
+                    newUser.login = login;
+                    newUser.password = password;
+                    newUser.mail = mail;
+                    newUser.reg_date = DateTime.Now.Date;
 
-                    model.users.Add(newUser);
+                    model.user.Add(newUser);
 
                     model.SaveChanges();
                 }
@@ -37,9 +39,11 @@ namespace Server.DB
         }
         public bool CheckPasswod(string login, string password)
         {
-            using (var model = new TDModel())
+            using (var model = new DBModel())
             {
-                var res = model.users.FirstOrDefault(user => user.Login == login && user.Password == password);
+
+                string md5Password = Md5(password);
+                var res = model.user.FirstOrDefault(user => user.login == login && user.password == md5Password);
 
                 return res != null;
             }
@@ -48,9 +52,9 @@ namespace Server.DB
         {
             lock (key)
             {
-                using (var model = new TDModel())
+                using (var model = new DBModel())
                 {
-                    Users res = model.users.FirstOrDefault(user => user.Mail == mail);
+                    user res = model.user.FirstOrDefault(user => user.mail == mail);
 
                     return res == null;
                 }
@@ -60,13 +64,26 @@ namespace Server.DB
         {
             lock (key)
             {
-                using (var model = new TDModel())
+                using (var model = new DBModel())
                 {
-                    Users res = model.users.FirstOrDefault(user => user.Login == login);
+                    user res = model.user.FirstOrDefault(user => user.login == login);
 
                     return res == null;
                 }
             }
+        }
+
+        private string Md5(string password)
+        {
+            byte[] hash = Encoding.ASCII.GetBytes(password);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] hashenc = md5.ComputeHash(hash);
+            string result = "";
+            foreach (var b in hashenc)
+            {
+                result += b.ToString("x2");
+            }
+            return result;
         }
     }
 }

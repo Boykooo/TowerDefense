@@ -4,8 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7b1c85b754354f6d8e530fb956843078" Name="Diagram1">
-        <EntityTypeShape EntityType="tower_defence_sheme.Users" Width="1.5" PointX="1.625" PointY="1.625" IsExpanded="true" />
+      <Diagram DiagramId="533b4921deb14088b804bd5d14038adb" Name="Diagram1">
+        <EntityTypeShape EntityType="tower_defenseModel.battle" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.level" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.resource" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.spell" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.tower" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.user" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="tower_defenseModel.user_resource" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="tower_defenseModel.fk2_level_id_" ManuallyRouted="false" />
+        <AssociationConnector Association="tower_defenseModel.resource_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tower_defenseModel.user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tower_defenseModel.user_battle" ManuallyRouted="false" />
+        <AssociationConnector Association="tower_defenseModel.user_spell" ManuallyRouted="false" />
+        <AssociationConnector Association="tower_defenseModel.user_tower" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

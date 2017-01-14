@@ -16,17 +16,14 @@ namespace Server
 
             ServerFacade serverFacade = new ServerFacade(clientFacade);
 
-            IServerController clientController = new ClientController.ServerController(serverFacade);
+            IServerController serverController = new ServerController(serverFacade);
 
-            IServer server = new ServerSocket(clientController);
+            IServer server = new ServerSocket(serverController);
 
-            serverFacade.Init(clientController);
-            clientFacade.Init(clientController);
+            serverFacade.Init(serverController);
+            clientFacade.Init(serverController);
 
             Task.Run(() => server.Start());
-
-            //DBController db = new DBController();
-            //db.CheckConnect();
 
             while (Console.ReadLine().ToLower() != "stop") ;
         }

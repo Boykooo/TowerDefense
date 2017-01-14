@@ -12,12 +12,13 @@ namespace Server.DB.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class user_resource
     {
-        public int ID_User { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Mail { get; set; }
-        public Nullable<System.DateTime> Reg_date { get; set; }
+        public int user_id { get; set; }
+        public int resource_id { get; set; }
+        public int amount { get; set; }
+    
+        public virtual resource resource { get; set; }
+        public virtual user user { get; set; }
     }
 }

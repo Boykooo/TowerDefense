@@ -17,14 +17,8 @@ namespace Network
             using (MemoryStream stream = new MemoryStream(msg))
             {
                 object obj = formatter.Deserialize(stream);
-                if (obj is Message)
-                {
-                    return obj as Message;
-                }
-                else
-                {
-                    return null;
-                }
+
+                return obj as Message;
             }
         }
 

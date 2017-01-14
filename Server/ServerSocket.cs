@@ -7,11 +7,11 @@ using Network;
 namespace Server
 {
     [Serializable]
-    class ServerSocket : IServer
+    public class ServerSocket : IServer
     {
         public ServerSocket(IServerController clientController)
         {
-            this.clientController = clientController;
+            this.serverController = clientController;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             maxQueue = 10;
             parser = new Parser();
@@ -22,7 +22,7 @@ namespace Server
         private const int port = 8888;
         private int maxQueue;
 
-        private IServerController clientController;
+        private IServerController serverController;
         private Parser parser;
 
         private void AcceptNewClient()
@@ -35,7 +35,7 @@ namespace Server
                 try
                 {
                     Socket client = socket.Accept();
-                    clientController.AddNewClient(client);
+                    serverController.AddNewClient(client);
                     Console.WriteLine("Установлено соединение с {0}", client.RemoteEndPoint);
                 }
                 catch

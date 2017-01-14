@@ -85,9 +85,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerComponents\ServerController.cs" />
-    <Compile Include="ServerComponents\ListenerController\Listener.cs" />
-    <Compile Include="DB\DBController.cs" />
+    <Compile Include="DB\Model\battle.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Model\level.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Model\resource.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Model\spell.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Model\TDModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,9 +112,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TDModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\Model\Users.cs">
+    <Compile Include="DB\Model\tower.cs">
       <DependentUpon>TDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\Model\user.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Model\user_resource.cs">
+      <DependentUpon>TDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServerComponents\ServerController.cs" />
+    <Compile Include="ServerComponents\ListenerController\Listener.cs" />
+    <Compile Include="DB\DBController.cs" />
     <Compile Include="Facade\ClientFacade.cs" />
     <Compile Include="Facade\ServerFacade.cs" />
     <Compile Include="ServerComponents\IDManager\IDManager.cs" />
@@ -145,7 +163,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="DB\Model\TDModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

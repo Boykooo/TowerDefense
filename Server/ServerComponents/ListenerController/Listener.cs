@@ -32,7 +32,7 @@ namespace Server.ClientController.ListenerController
                 while (true)
                 {
 
-                    len = client.Receive(data); // ???
+                    client.Receive(data); // ???
 
                     lock (lockParser)
                     {
@@ -51,7 +51,7 @@ namespace Server.ClientController.ListenerController
             }
             catch
             {
-                Disconnect(id); // отрубаем клиента от сервера
+                Disconnect(id); // отключаем клиента от сервера
 
                 Console.WriteLine("Слушатель для id = {0} отключен", id);
             }
