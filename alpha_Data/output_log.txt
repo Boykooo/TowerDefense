@@ -1,0 +1,146 @@
+Initialize engine version: 5.4.1f1 (649f48bbbf0f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon (TM) R9 380 Series (ID=0x6938)
+    Vendor:   ATI
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\TD\alpha_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\Network.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\Network.dll into Unity Child Domain
+Platform assembly: E:\TD\alpha_Data\Managed\Proxy.dll (this message is harmless)
+Loading E:\TD\alpha_Data\Managed\Proxy.dll into Unity Child Domain
+- Completed reload, in  0.374 seconds
+Platform assembly: E:\TD\alpha_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: E:\TD\alpha_Data\Managed\System.dll (this message is harmless)
+desktop: 1680x1050 60Hz; virtual: 1680x1050 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+The referenced script on this Behaviour (Game Object 'MainCanvas') is missing!
+ 
+(Filename:  Line: 1656)
+
+UnloadTime: 0.935136 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 2f9c -> priority: 1 
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.925267 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 3677.
+Total: 2.329019 ms (FindLiveObjects: 0.220069 ms CreateObjectMapping: 0.151418 ms MarkObjects: 1.091687 ms  DeleteObjects: 0.864239 ms)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'mon_goblinWizard') is missing!
+ 
+(Filename:  Line: 1656)
+

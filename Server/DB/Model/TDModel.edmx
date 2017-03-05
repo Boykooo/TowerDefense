@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище tower_defenseModel" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="battle">
+          <Key>
+            <PropertyRef Name="battle_id" />
+          </Key>
+          <Property Name="battle_id" Type="int" Nullable="false" />
+          <Property Name="battle_level" Type="int" Nullable="false" />
+          <Property Name="coord_x" Type="int" Nullable="false" />
+          <Property Name="coord_y" Type="int" Nullable="false" />
+          <Property Name="coord_z" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="level">
+          <Key>
+            <PropertyRef Name="level_id" />
+          </Key>
+          <Property Name="level_id" Type="int" Nullable="false" />
+          <Property Name="experience" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="resource">
+          <Key>
+            <PropertyRef Name="resource_id" />
+          </Key>
+          <Property Name="resource_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spell">
+          <Key>
+            <PropertyRef Name="spell_id" />
+          </Key>
+          <Property Name="spell_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tower">
+          <Key>
+            <PropertyRef Name="tower_id" />
+          </Key>
+          <Property Name="tower_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="reg_date" Type="date" Nullable="false" />
+          <Property Name="level_id" Type="int" Nullable="false" />
+          <Property Name="experience" Type="int" Nullable="false" />
+          <Property Name="sum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_battle">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="battle_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="battle_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_resource">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="resource_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="resource_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_spell">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="spell_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="spell_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_tower">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="tower_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="tower_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_battle_id">
+          <End Role="battle" Type="Self.battle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_battle" Type="Self.user_battle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="battle">
+              <PropertyRef Name="battle_id" />
+            </Principal>
+            <Dependent Role="user_battle">
+              <PropertyRef Name="battle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_battle" Type="Self.user_battle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_battle">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_level_id_">
+          <End Role="level" Type="Self.level" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="level">
+              <PropertyRef Name="level_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="resource_fk">
+          <End Role="resource" Type="Self.resource" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_resource" Type="Self.user_resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resource">
+              <PropertyRef Name="resource_id" />
+            </Principal>
+            <Dependent Role="user_resource">
+              <PropertyRef Name="resource_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="spell_fk">
+          <End Role="spell" Type="Self.spell" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_spell" Type="Self.user_spell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="spell">
+              <PropertyRef Name="spell_id" />
+            </Principal>
+            <Dependent Role="user_spell">
+              <PropertyRef Name="spell_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tower_fk">
+          <End Role="tower" Type="Self.tower" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_tower" Type="Self.user_tower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tower">
+              <PropertyRef Name="tower_id" />
+            </Principal>
+            <Dependent Role="user_tower">
+              <PropertyRef Name="tower_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_fk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_resource" Type="Self.user_resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_resource">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_spell_fk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_spell" Type="Self.user_spell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_spell">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_tower_fk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_tower" Type="Self.user_tower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_tower">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище tower_defenseModelContainer">
+          <EntitySet Name="battle" EntityType="Self.battle" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="level" EntityType="Self.level" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="resource" EntityType="Self.resource" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="spell" EntityType="Self.spell" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="tower" EntityType="Self.tower" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="user_battle" EntityType="Self.user_battle" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="user_resource" EntityType="Self.user_resource" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="user_spell" EntityType="Self.user_spell" Schema="tower_defense" store:Type="Tables" />
+          <EntitySet Name="user_tower" EntityType="Self.user_tower" Schema="tower_defense" store:Type="Tables" />
+          <AssociationSet Name="fk_battle_id" Association="Self.fk_battle_id">
+            <End Role="battle" EntitySet="battle" />
+            <End Role="user_battle" EntitySet="user_battle" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_battle" EntitySet="user_battle" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_level_id_" Association="Self.fk2_level_id_">
+            <End Role="level" EntitySet="level" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="resource_fk" Association="Self.resource_fk">
+            <End Role="resource" EntitySet="resource" />
+            <End Role="user_resource" EntitySet="user_resource" />
+          </AssociationSet>
+          <AssociationSet Name="spell_fk" Association="Self.spell_fk">
+            <End Role="spell" EntitySet="spell" />
+            <End Role="user_spell" EntitySet="user_spell" />
+          </AssociationSet>
+          <AssociationSet Name="tower_fk" Association="Self.tower_fk">
+            <End Role="tower" EntitySet="tower" />
+            <End Role="user_tower" EntitySet="user_tower" />
+          </AssociationSet>
+          <AssociationSet Name="user_fk" Association="Self.user_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_resource" EntitySet="user_resource" />
+          </AssociationSet>
+          <AssociationSet Name="user_spell_fk" Association="Self.user_spell_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_spell" EntitySet="user_spell" />
+          </AssociationSet>
+          <AssociationSet Name="user_tower_fk" Association="Self.user_tower_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_tower" EntitySet="user_tower" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tower_defenseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="battle">
+          <Key>
+            <PropertyRef Name="battle_id" />
+          </Key>
+          <Property Name="battle_id" Type="Int32" Nullable="false" />
+          <Property Name="battle_level" Type="Int32" Nullable="false" />
+          <Property Name="coord_x" Type="Int32" Nullable="false" />
+          <Property Name="coord_y" Type="Int32" Nullable="false" />
+          <Property Name="coord_z" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.user_battle" FromRole="battle" ToRole="user" />
+        </EntityType>
+        <EntityType Name="level">
+          <Key>
+            <PropertyRef Name="level_id" />
+          </Key>
+          <Property Name="level_id" Type="Int32" Nullable="false" />
+          <Property Name="experience" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.fk2_level_id_" FromRole="level" ToRole="user" />
+        </EntityType>
+        <EntityType Name="resource">
+          <Key>
+            <PropertyRef Name="resource_id" />
+          </Key>
+          <Property Name="resource_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user_resource" Relationship="Self.resource_fk" FromRole="resource" ToRole="user_resource" />
+        </EntityType>
+        <EntityType Name="spell">
+          <Key>
+            <PropertyRef Name="spell_id" />
+          </Key>
+          <Property Name="spell_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.user_spell" FromRole="spell" ToRole="user" />
+        </EntityType>
+        <EntityType Name="tower">
+          <Key>
+            <PropertyRef Name="tower_id" />
+          </Key>
+          <Property Name="tower_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.user_tower" FromRole="tower" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reg_date" Type="DateTime" Nullable="false" />
+          <Property Name="level_id" Type="Int32" Nullable="false" />
+          <Property Name="experience" Type="Int32" Nullable="false" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="level" Relationship="Self.fk2_level_id_" FromRole="user" ToRole="level" />
+          <NavigationProperty Name="user_resource" Relationship="Self.user_fk" FromRole="user" ToRole="user_resource" />
+          <NavigationProperty Name="battle" Relationship="Self.user_battle" FromRole="user" ToRole="battle" />
+          <NavigationProperty Name="spell" Relationship="Self.user_spell" FromRole="user" ToRole="spell" />
+          <NavigationProperty Name="tower" Relationship="Self.user_tower" FromRole="user" ToRole="tower" />
+        </EntityType>
+        <EntityType Name="user_resource">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="resource_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="resource_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="resource" Relationship="Self.resource_fk" FromRole="user_resource" ToRole="resource" />
+          <NavigationProperty Name="user" Relationship="Self.user_fk" FromRole="user_resource" ToRole="user" />
+        </EntityType>
+        <Association Name="fk2_level_id_">
+          <End Role="level" Type="Self.level" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="level">
+              <PropertyRef Name="level_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="level_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="resource_fk">
+          <End Role="resource" Type="Self.resource" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_resource" Type="Self.user_resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="resource">
+              <PropertyRef Name="resource_id" />
+            </Principal>
+            <Dependent Role="user_resource">
+              <PropertyRef Name="resource_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_fk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_resource" Type="Self.user_resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_resource">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_battle">
+          <End Role="battle" Type="Self.battle" Multiplicity="*" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+        </Association>
+        <Association Name="user_spell">
+          <End Role="spell" Type="Self.spell" Multiplicity="*" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+        </Association>
+        <Association Name="user_tower">
+          <End Role="tower" Type="Self.tower" Multiplicity="*" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="battle" EntityType="Self.battle" />
+          <EntitySet Name="level" EntityType="Self.level" />
+          <EntitySet Name="resource" EntityType="Self.resource" />
+          <EntitySet Name="spell" EntityType="Self.spell" />
+          <EntitySet Name="tower" EntityType="Self.tower" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="user_resource" EntityType="Self.user_resource" />
+          <AssociationSet Name="fk2_level_id_" Association="Self.fk2_level_id_">
+            <End Role="level" EntitySet="level" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="resource_fk" Association="Self.resource_fk">
+            <End Role="resource" EntitySet="resource" />
+            <End Role="user_resource" EntitySet="user_resource" />
+          </AssociationSet>
+          <AssociationSet Name="user_fk" Association="Self.user_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_resource" EntitySet="user_resource" />
+          </AssociationSet>
+          <AssociationSet Name="user_battle" Association="Self.user_battle">
+            <End Role="battle" EntitySet="battle" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="user_spell" Association="Self.user_spell">
+            <End Role="spell" EntitySet="spell" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="user_tower" Association="Self.user_tower">
+            <End Role="tower" EntitySet="tower" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище tower_defenseModelContainer" CdmEntityContainer="DBModel">
+          <EntitySetMapping Name="battle">
+            <EntityTypeMapping TypeName="tower_defenseModel.battle">
+              <MappingFragment StoreEntitySet="battle">
+                <ScalarProperty Name="battle_id" ColumnName="battle_id" />
+                <ScalarProperty Name="battle_level" ColumnName="battle_level" />
+                <ScalarProperty Name="coord_x" ColumnName="coord_x" />
+                <ScalarProperty Name="coord_y" ColumnName="coord_y" />
+                <ScalarProperty Name="coord_z" ColumnName="coord_z" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="level">
+            <EntityTypeMapping TypeName="tower_defenseModel.level">
+              <MappingFragment StoreEntitySet="level">
+                <ScalarProperty Name="level_id" ColumnName="level_id" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resource">
+            <EntityTypeMapping TypeName="tower_defenseModel.resource">
+              <MappingFragment StoreEntitySet="resource">
+                <ScalarProperty Name="resource_id" ColumnName="resource_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="spell">
+            <EntityTypeMapping TypeName="tower_defenseModel.spell">
+              <MappingFragment StoreEntitySet="spell">
+                <ScalarProperty Name="spell_id" ColumnName="spell_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tower">
+            <EntityTypeMapping TypeName="tower_defenseModel.tower">
+              <MappingFragment StoreEntitySet="tower">
+                <ScalarProperty Name="tower_id" ColumnName="tower_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="tower_defenseModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="level_id" ColumnName="level_id" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_resource">
+            <EntityTypeMapping TypeName="tower_defenseModel.user_resource">
+              <MappingFragment StoreEntitySet="user_resource">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="resource_id" ColumnName="resource_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="user_battle" TypeName="tower_defenseModel.user_battle" StoreEntitySet="user_battle">
+            <EndProperty Name="battle">
+              <ScalarProperty Name="battle_id" ColumnName="battle_id" />
+            </EndProperty>
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="user_spell" TypeName="tower_defenseModel.user_spell" StoreEntitySet="user_spell">
+            <EndProperty Name="spell">
+              <ScalarProperty Name="spell_id" ColumnName="spell_id" />
+            </EndProperty>
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="user_tower" TypeName="tower_defenseModel.user_tower" StoreEntitySet="user_tower">
+            <EndProperty Name="tower">
+              <ScalarProperty Name="tower_id" ColumnName="tower_id" />
+            </EndProperty>
+            <EndProperty Name="user">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

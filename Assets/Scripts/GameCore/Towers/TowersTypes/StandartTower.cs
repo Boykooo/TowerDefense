@@ -10,7 +10,7 @@ namespace Assets.GameCore.Turrets.TurretsTypes
 {
     class StandartTower : BaseTower
     {
-        public StandartTower() : base(5, 1, 300, 100)
+        public StandartTower() : base(5, 2, 100, 100)
         {
 
         }
